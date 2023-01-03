@@ -7,6 +7,8 @@ router = routers.DefaultRouter()
 router.register("printers", PrinterViewSet)
 router.register("checks", CheckViewSet)
 
-urlpatterns = [path("", include(router.urls))]
+urlpatterns = [
+    path("", include(router.urls)),
+]
 
 app_name = "check"
