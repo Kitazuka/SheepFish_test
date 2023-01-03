@@ -8,7 +8,7 @@ class TypeChoices(models.TextChoices):
 
 class Printer(models.Model):
     name = models.CharField(max_length=50)
-    api_key = models.CharField(max_length=255, primary_key=True)
+    api_key = models.CharField(max_length=255, unique=True)
     check_type = models.CharField(max_length=50, choices=TypeChoices.choices)
     point_id = models.IntegerField()
 

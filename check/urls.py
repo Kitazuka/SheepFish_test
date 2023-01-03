@@ -1,5 +1,12 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 
-# urlpatterns = [path("", include(router.urls))]
+from check.views import PrinterViewSet, CheckViewSet
+
+router = routers.DefaultRouter()
+router.register("printers", PrinterViewSet)
+router.register("checks", CheckViewSet)
+
+urlpatterns = [path("", include(router.urls))]
 
 app_name = "check"
