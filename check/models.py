@@ -12,6 +12,12 @@ class Printer(models.Model):
     check_type = models.CharField(max_length=50, choices=TypeChoices.choices)
     point_id = models.IntegerField()
 
+    @staticmethod
+    def print_check(check: "Check"):
+        print(check.order)
+        check.status = "printed"
+        check.save()
+
     def __str__(self):
         return self.name
 

@@ -1,7 +1,9 @@
+from django.db import transaction
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from check.models import Printer, Check
+from check.tasks import create_pdf_file
 
 
 class PrinterSerializer(serializers.ModelSerializer):
@@ -25,18 +27,27 @@ class CheckCreateSerializer(serializers.ModelSerializer):
         fields = ["point_id", "type", "order"]
 
     def create(self, validated_data):
-        type = validated_data["type"]
-        order = validated_data["order"]
-        point_id = validated_data["point_id"]
-        printers = Printer.objects.filter(point_id=point_id)
+        with transaction.atomic():
+            type = validated_data["type"]
+            order = validated_data["order"]
+            point_id = validated_data["point_id"]
+            printers = Printer.objects.filter(point_id=point_id, check_type=type)
 
-        if printers:
-            for printer in printers:
-                Check.objects.create(printer_id=printer, type=type, order=order)
-        else:
-            raise ValidationError({"error": f"incorrect point_id: {point_id}"})
-
-        return point_id
+            if printers:
+                for printer in printers:
+                    check = Check.objects.create(
+                        printer_id=printer, type=type, order=order
+                    )
+                    create_pdf_file.delay(check.id)
+            else:
+                raise ValidationError(
+                    {
+                        "error": f"We don't have printers for this check here"
+                    }
+                )
+            return point_id
 
     def to_representation(self, point_id):
-        return {"success": f"checks was created for all printer of point №{point_id}"}
+        return {
+            "success": f"checks was created for all printer of point №{point_id}"
+        }

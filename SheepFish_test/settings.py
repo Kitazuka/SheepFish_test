@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "check.apps.CheckConfig",
-    "rest_framework"
+    "rest_framework",
+    "django_celery_beat"
 ]
 
 MIDDLEWARE = [
@@ -119,7 +120,26 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = "media"
+
+CHECK_CLIENT_TEMPLATE = os.path.join(
+    BASE_DIR, "templates/check-client.html"
+)
+
+CHECK_KITCHEN_TEMPLATE = os.path.join(
+    BASE_DIR, "templates/check-kitchen.html"
+)
+
+WKHTMLTOPDF_URL = "http://localhost:4133/"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+CELERY_TIMEZONE = "Europe/Kyiv"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
