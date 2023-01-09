@@ -1,0 +1,42 @@
+[
+{
+    "model": "check.printer",
+    "pk": 1,
+    "fields": {
+        "name": "Canon 5365",
+        "api_key": "826d771e-92af-44dd-85c1-25f6f02a4ba1",
+        "check_type": "Client",
+        "point_id": 1
+    }
+},
+{
+    "model": "check.printer",
+    "pk": 2,
+    "fields": {
+        "name": "Canon 9632",
+        "api_key": "ba48f58a-1f15-4712-874a-433477436a48",
+        "check_type": "Client",
+        "point_id": 1
+    }
+},
+{
+    "model": "check.printer",
+    "pk": 3,
+    "fields": {
+        "name": "HP 23165",
+        "api_key": "de92bd4d-888f-4228-8d45-513d68b3a72b",
+        "check_type": "Kitchen",
+        "point_id": 1
+    }
+},
+{
+    "model": "check.printer",
+    "pk": 4,
+    "fields": {
+        "name": "HP 963",
+        "api_key": "6864da34-d268-4fdd-ab46-0227be44c95e",
+        "check_type": "Client",
+        "point_id": 2
+    }
+}
+]
