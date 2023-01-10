@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "check.apps.CheckConfig",
     "rest_framework",
-    "django_celery_beat"
+    "django_celery_beat",
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [
@@ -131,13 +132,9 @@ STATIC_URL = "static/"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = "media"
 
-CHECK_CLIENT_TEMPLATE = os.path.join(
-    BASE_DIR, "templates/check-client.html"
-)
+CHECK_CLIENT_TEMPLATE = os.path.join(BASE_DIR, "templates/check-client.html")
 
-CHECK_KITCHEN_TEMPLATE = os.path.join(
-    BASE_DIR, "templates/check-kitchen.html"
-)
+CHECK_KITCHEN_TEMPLATE = os.path.join(BASE_DIR, "templates/check-kitchen.html")
 
 WKHTMLTOPDF_URL = os.getenv("WKHTMLTOPDF_URL")
 

@@ -31,7 +31,9 @@ class CheckCreateSerializer(serializers.ModelSerializer):
             type = validated_data["type"]
             order = validated_data["order"]
             point_id = validated_data["point_id"]
-            printers = Printer.objects.filter(point_id=point_id, check_type=type)
+            printers = Printer.objects.filter(
+                point_id=point_id, check_type=type
+            )
 
             if printers:
                 for printer in printers:
@@ -41,9 +43,7 @@ class CheckCreateSerializer(serializers.ModelSerializer):
                     create_pdf_file.delay(check.id)
             else:
                 raise ValidationError(
-                    {
-                        "error": f"We don't have printers for this check here"
-                    }
+                    {"error": f"We don't have printers for this check here"}
                 )
             return point_id
 

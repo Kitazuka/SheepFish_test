@@ -5,16 +5,20 @@ import base64
 from django.template.loader import render_to_string
 from requests import Response
 
+from check.models import Check
 from SheepFish_test.settings import (
     CHECK_CLIENT_TEMPLATE,
     CHECK_KITCHEN_TEMPLATE,
-    WKHTMLTOPDF_URL
+    WKHTMLTOPDF_URL,
 )
-from check.models import Check
 
 
 def wkhtmltopdf_create_pdf_request(check: Check) -> Response:
-    template = CHECK_CLIENT_TEMPLATE if check.type == "Client" else CHECK_KITCHEN_TEMPLATE
+    template = (
+        CHECK_CLIENT_TEMPLATE
+        if check.type == "Client"
+        else CHECK_KITCHEN_TEMPLATE
+    )
     check_html = render_to_string(template, {"check": check})
     b = base64.b64encode(bytes(check_html, "utf-8"))
     data = {

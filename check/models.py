@@ -23,7 +23,6 @@ class Printer(models.Model):
 
 
 class Check(models.Model):
-
     class StatusChoices(models.TextChoices):
         NEW = "new"
         RENDERED = "rendered"
