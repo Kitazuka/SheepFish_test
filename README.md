@@ -41,5 +41,6 @@ celery -A SheepFish_test beat -l INFO --scheduler django_celery_beat.schedulers:
   "another dish": 1
 }
 ```
+Where:
 - "dish" - name of dish, 
-- 1 - count of this dish in order
+- 2 - count of this dish in order
