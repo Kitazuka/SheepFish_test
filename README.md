@@ -1,6 +1,6 @@
 # SheepFish test task
 
-API service for cinema management written on DRF
+API service for convert checks to pdf and print them on printer
 
 ## How to run
 1. Run this commands
