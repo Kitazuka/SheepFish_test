@@ -5,7 +5,7 @@ API service for cinema management written on DRF
 ## How to run
 1. Run this commands
 ```shell
-git clone https://github.com/Kitazuka/SheepFish_test
+git clone https://github.com/Kitazuka/SheepFish_test.git
 python -m venv venv
 venv\Scripts\activate # on Windows
 source venv/bin/activate # on macOS
