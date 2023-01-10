@@ -18,7 +18,6 @@ docker-compose up --build
 ```
 4. Run migrations and load default data:
 ```shell
-python manage.py makemigrations
 python manage.py migrate
 python manage.py loaddata printers_fixtures.json
 python manage.py createsuperuser # to create user and get access to admin page
